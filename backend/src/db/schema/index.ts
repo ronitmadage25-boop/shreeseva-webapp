@@ -16,6 +16,10 @@ export const users = pgTable('users', {
   fullName: varchar('full_name', { length: 255 }).notNull(),
   email: varchar('email', { length: 255 }),
   role: varchar('role', { length: 20 }).notNull().default('customer'), // 'customer' | 'owner' | 'admin' | 'delivery'
+  username: varchar('username', { length: 50 }).unique(),
+  passwordHash: varchar('password_hash', { length: 255 }),
+  isTemporaryPassword: boolean('is_temporary_password').default(false).notNull(),
+  passwordChangedAt: timestamp('password_changed_at'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -204,11 +208,60 @@ export const adminActivityLogs = pgTable('admin_activity_logs', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
+// 14. Inventory Audit Logs Table (Manual corrections & movements)
+export const inventoryLogs = pgTable('inventory_logs', {
+  id: varchar('id', { length: 36 }).primaryKey(),
+  productId: varchar('product_id', { length: 36 })
+    .references(() => products.id, { onDelete: 'cascade' })
+    .notNull(),
+  previousStock: integer('previous_stock').notNull(),
+  newStock: integer('new_stock').notNull(),
+  adjustmentQuantity: integer('adjustment_quantity').notNull(),
+  reason: varchar('reason', { length: 255 }).notNull(),
+  actorId: varchar('actor_id', { length: 36 }).references(() => users.id, { onDelete: 'set null' }),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+// 15. Offers & Coupons Table
+export const offers = pgTable('offers', {
+  id: varchar('id', { length: 36 }).primaryKey(),
+  code: varchar('code', { length: 50 }).notNull().unique(),
+  title: varchar('title', { length: 255 }).notNull(),
+  description: text('description'),
+  discountType: varchar('discount_type', { length: 20 }).default('percentage').notNull(), // 'percentage' | 'fixed'
+  discountValue: numeric('discount_value', { precision: 10, scale: 2 }).notNull(),
+  minOrderValue: numeric('min_order_value', { precision: 10, scale: 2 }).default('0').notNull(),
+  maxDiscount: numeric('max_discount', { precision: 10, scale: 2 }),
+  startDate: timestamp('start_date'),
+  expiryDate: timestamp('expiry_date'),
+  usageLimit: integer('usage_limit'),
+  usageCount: integer('usage_count').default(0).notNull(),
+  isActive: boolean('is_active').default(true).notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// 16. Store Settings Table
+export const storeSettings = pgTable('store_settings', {
+  id: varchar('id', { length: 36 }).primaryKey(),
+  storeName: varchar('store_name', { length: 255 }).default('Shree Seva Enterprises & Readymade').notNull(),
+  phone: varchar('phone', { length: 50 }).default('+91 98765 43210').notNull(),
+  email: varchar('email', { length: 255 }).default('contact@shreeseva.local').notNull(),
+  address: text('address').default('Station Road, Opp. Primary School, Pachora, Maharashtra 424201').notNull(),
+  operatingHours: varchar('operating_hours', { length: 100 }).default('8:00 AM - 9:30 PM (Daily)').notNull(),
+  deliveryFee: numeric('delivery_fee', { precision: 10, scale: 2 }).default('0').notNull(),
+  minOrderValue: numeric('min_order_value', { precision: 10, scale: 2 }).default('0').notNull(),
+  lowStockThreshold: integer('low_stock_threshold').default(10).notNull(),
+  timezone: varchar('timezone', { length: 50 }).default('Asia/Kolkata').notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
 // =================== RELATIONS ===================
 export const usersRelations = relations(users, ({ many }) => ({
   addresses: many(addresses),
   orders: many(orders),
   activityLogs: many(adminActivityLogs),
+  inventoryLogs: many(inventoryLogs),
 }));
 
 export const addressesRelations = relations(addresses, ({ one }) => ({
@@ -232,7 +285,19 @@ export const productsRelations = relations(products, ({ one, many }) => ({
     fields: [products.id],
     references: [inventory.productId],
   }),
+  inventoryLogs: many(inventoryLogs),
   orderItems: many(orderItems),
+}));
+
+export const inventoryLogsRelations = relations(inventoryLogs, ({ one }) => ({
+  product: one(products, {
+    fields: [inventoryLogs.productId],
+    references: [products.id],
+  }),
+  actor: one(users, {
+    fields: [inventoryLogs.actorId],
+    references: [users.id],
+  }),
 }));
 
 export const productImagesRelations = relations(productImages, ({ one }) => ({
