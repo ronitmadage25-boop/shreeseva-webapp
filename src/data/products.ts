@@ -314,6 +314,7 @@ export const beverageProducts: Product[] = [
     // Coca-Cola bottle with classic red label
     images: ['https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&q=80'],
     category: 'cold-drinks',
+    subcategory: 'soft-drinks',
     brand: 'Coca-Cola',
     unit: '1.25 L',
     variants: [
@@ -327,6 +328,7 @@ export const beverageProducts: Product[] = [
     reviewCount: 5420,
     tags: ['cola', 'cold drink', 'soda', 'coca cola'],
     isBestSeller: true,
+    isFeatured: true,
   },
   {
     id: 'b002',
@@ -338,6 +340,7 @@ export const beverageProducts: Product[] = [
     // Sprite bottle / green soda can
     images: ['https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=400&q=80'],
     category: 'cold-drinks',
+    subcategory: 'soft-drinks',
     brand: 'Sprite',
     unit: '1.25 L',
     variants: [
@@ -348,6 +351,7 @@ export const beverageProducts: Product[] = [
     rating: 4.5,
     reviewCount: 3210,
     tags: ['sprite', 'lemon', 'cold drink'],
+    isFeatured: true,
   },
   {
     id: 'b003',
@@ -360,6 +364,7 @@ export const beverageProducts: Product[] = [
     // Fruit juice bottle
     images: ['https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80'],
     category: 'cold-drinks',
+    subcategory: 'juices',
     brand: 'Real',
     unit: '1 L',
     variants: [
@@ -370,6 +375,8 @@ export const beverageProducts: Product[] = [
     rating: 4.3,
     reviewCount: 1890,
     tags: ['juice', 'fruit juice', 'real', 'mixed fruit'],
+    isOnOffer: true,
+    isNewArrival: true,
   },
   {
     id: 'b004',
@@ -381,6 +388,7 @@ export const beverageProducts: Product[] = [
     // Packaged mineral water bottle
     images: ['https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&q=80'],
     category: 'cold-drinks',
+    subcategory: 'packaged-water',
     brand: 'Bisleri',
     unit: '1 L',
     variants: [
@@ -405,12 +413,15 @@ export const beverageProducts: Product[] = [
     // Black energy drink can
     images: ['https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=400&q=80'],
     category: 'cold-drinks',
+    subcategory: 'energy-drinks',
     brand: 'Monster',
     unit: '473 ml',
     stock: 40,
     rating: 4.4,
     reviewCount: 2100,
     tags: ['energy drink', 'monster', 'caffeine'],
+    isOnOffer: true,
+    isNewArrival: true,
   },
   {
     id: 'b006',
@@ -423,6 +434,7 @@ export const beverageProducts: Product[] = [
     // Mango juice drink bottle
     images: ['https://images.unsplash.com/photo-1546171753-97d7676e4602?w=400&q=80'],
     category: 'cold-drinks',
+    subcategory: 'juices',
     brand: 'Frooti',
     unit: '200 ml',
     variants: [
@@ -433,6 +445,7 @@ export const beverageProducts: Product[] = [
     rating: 4.5,
     reviewCount: 4320,
     tags: ['frooti', 'mango', 'juice drink'],
+    isOnOffer: true,
   },
 ];
 
@@ -524,6 +537,27 @@ export const stationeryProducts: Product[] = [
     rating: 4.3,
     reviewCount: 760,
     tags: ['geometry', 'compass', 'school', 'maths'],
+    isOnOffer: true,
+  },
+  {
+    id: 's005',
+    name: 'Nataraj 621 Pencils (Pack of 10)',
+    slug: 'nataraj-621-pencils-10',
+    description: 'Classic dark pencils for clear handwriting and sketching.',
+    price: 45,
+    originalPrice: 50,
+    discount: 10,
+    // Wood drawing pencils
+    images: ['https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=400&q=80'],
+    category: 'stationery',
+    subcategory: 'pencils',
+    brand: 'Nataraj',
+    unit: '10 pcs',
+    stock: 90,
+    rating: 4.7,
+    reviewCount: 1420,
+    tags: ['nataraj', 'pencils', 'school stationery'],
+    isBestSeller: true,
   },
 ];
 
@@ -541,12 +575,15 @@ export const personalCareProducts: Product[] = [
     // Soap bars
     images: ['https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400&q=80'],
     category: 'personal-care',
+    subcategory: 'soaps',
     brand: 'Lifebuoy',
     unit: '4 × 100 g',
     stock: 60,
     rating: 4.5,
     reviewCount: 3400,
     tags: ['soap', 'germ protection', 'lifebuoy'],
+    isFeatured: true,
+    isOnOffer: true,
   },
   {
     id: 'p002',
@@ -559,12 +596,54 @@ export const personalCareProducts: Product[] = [
     // Hair shampoo bottle
     images: ['https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80'],
     category: 'personal-care',
+    subcategory: 'hair-care',
     brand: 'Pantene',
     unit: '340 ml',
     stock: 35,
     rating: 4.4,
     reviewCount: 1230,
     tags: ['shampoo', 'pantene', 'hair care'],
+    isNewArrival: true,
+  },
+  {
+    id: 'p003',
+    name: 'Dettol Original Antiseptic Liquid',
+    slug: 'dettol-original-antiseptic-liquid',
+    description: 'Proven effective first aid and household disinfectant liquid.',
+    price: 110,
+    originalPrice: 125,
+    discount: 12,
+    // Antiseptic liquid / personal care bottle
+    images: ['https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80'],
+    category: 'personal-care',
+    subcategory: 'health-hygiene',
+    brand: 'Dettol',
+    unit: '250 ml',
+    stock: 45,
+    rating: 4.8,
+    reviewCount: 2900,
+    tags: ['dettol', 'antiseptic', 'hygiene'],
+    isBestSeller: true,
+  },
+  {
+    id: 'p004',
+    name: 'Colgate Strong Teeth Toothpaste',
+    slug: 'colgate-strong-teeth',
+    description: 'Strengthens enamel for strong teeth and fresh breath.',
+    price: 85,
+    originalPrice: 95,
+    discount: 11,
+    // Toothpaste tube
+    images: ['https://images.unsplash.com/photo-1559190394-df5a28aab5c5?w=400&q=80'],
+    category: 'personal-care',
+    subcategory: 'oral-care',
+    brand: 'Colgate',
+    unit: '300 g',
+    stock: 55,
+    rating: 4.5,
+    reviewCount: 4800,
+    tags: ['toothpaste', 'colgate', 'dental', 'oral care'],
+    isBestSeller: true,
   },
 ];
 
@@ -582,31 +661,55 @@ export const cleaningProducts: Product[] = [
     // Laundry washing powder / detergent
     images: ['https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&q=80'],
     category: 'home-cleaning',
+    subcategory: 'detergents',
     brand: 'Surf Excel',
     unit: '1 kg',
     stock: 30,
     rating: 4.6,
     reviewCount: 2100,
     tags: ['detergent', 'surf excel', 'washing powder'],
+    isFeatured: true,
+    isOnOffer: true,
   },
   {
     id: 'c002',
-    name: 'Colgate Strong Teeth Toothpaste',
-    slug: 'colgate-strong-teeth',
-    description: 'Strengthens enamel for strong teeth and fresh breath.',
-    price: 85,
-    originalPrice: 95,
-    discount: 11,
-    // Toothpaste tube
-    images: ['https://images.unsplash.com/photo-1559190394-df5a28aab5c5?w=400&q=80'],
+    name: 'Vim Dishwash Gel Lemon',
+    slug: 'vim-dishwash-gel-lemon',
+    description: 'Concentrated gel with power of 100 lemons for grease-free utensils.',
+    price: 52,
+    originalPrice: 58,
+    discount: 10,
+    // Dishwashing bottle
+    images: ['https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&q=80'],
     category: 'home-cleaning',
-    brand: 'Colgate',
-    unit: '300 g',
-    stock: 55,
-    rating: 4.5,
-    reviewCount: 4800,
-    tags: ['toothpaste', 'colgate', 'dental', 'oral care'],
+    subcategory: 'dishwash',
+    brand: 'Vim',
+    unit: '500 ml',
+    stock: 65,
+    rating: 4.7,
+    reviewCount: 3100,
+    tags: ['vim', 'dishwash', 'cleaner', 'utensils'],
     isBestSeller: true,
+  },
+  {
+    id: 'c003',
+    name: 'Lizol Disinfectant Floor Cleaner',
+    slug: 'lizol-disinfectant-floor-cleaner',
+    description: 'Kills 99.9% germs and gives 10x better cleaning than standard phenyl.',
+    price: 95,
+    originalPrice: 105,
+    discount: 10,
+    // Cleaning fluid bottle
+    images: ['https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&q=80'],
+    category: 'home-cleaning',
+    subcategory: 'surface-cleaners',
+    brand: 'Lizol',
+    unit: '500 ml',
+    stock: 40,
+    rating: 4.6,
+    reviewCount: 1850,
+    tags: ['lizol', 'floor cleaner', 'germ protection'],
+    isNewArrival: true,
   },
 ];
 
@@ -623,6 +726,7 @@ export const snackProducts: Product[] = [
     // Potato chips packet
     images: ['https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&q=80'],
     category: 'snacks',
+    subcategory: 'chips-crisps',
     brand: "Lay's",
     unit: '52 g',
     variants: [
@@ -635,6 +739,7 @@ export const snackProducts: Product[] = [
     reviewCount: 6700,
     tags: ['chips', 'lays', 'potato chips', 'snacks'],
     isBestSeller: true,
+    isFeatured: true,
   },
   {
     id: 'sn002',
@@ -646,6 +751,7 @@ export const snackProducts: Product[] = [
     // Glucose tea biscuits
     images: ['https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80'],
     category: 'snacks',
+    subcategory: 'biscuits',
     brand: 'Parle-G',
     unit: '100 g',
     variants: [
@@ -658,9 +764,29 @@ export const snackProducts: Product[] = [
     tags: ['parle-g', 'glucose biscuit', 'biscuit', 'snack'],
     isBestSeller: true,
   },
+  {
+    id: 'sn003',
+    name: "Haldiram's Nagpur Bhujia Sev",
+    slug: 'haldirams-nagpur-bhujia-sev',
+    description: 'Crispy, spiced gram flour noodles cooked to golden perfection.',
+    price: 45,
+    originalPrice: 50,
+    discount: 10,
+    // Namkeen snack packet
+    images: ['https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&q=80'],
+    category: 'snacks',
+    subcategory: 'namkeen',
+    brand: "Haldiram's",
+    unit: '200 g',
+    stock: 80,
+    rating: 4.6,
+    reviewCount: 3950,
+    tags: ['bhujia', 'sev', 'haldirams', 'namkeen'],
+    isNewArrival: true,
+  },
 ];
 
-// ─── COMBINED EXPORTS ─────────────────────────────────────────────────────────
+// ─── COMBINED EXPORTS & QUERY HELPERS ────────────────────────────────────────
 
 export const allProducts: Product[] = [
   ...kiranaProducts,
@@ -673,9 +799,53 @@ export const allProducts: Product[] = [
 
 export const bestSellers = allProducts.filter((p) => p.isBestSeller);
 
-export const specialOffers = allProducts.filter(
-  (p) => p.discount !== undefined && p.discount >= 10
+export const newArrivals = allProducts.filter((p) => p.isNewArrival);
+
+export const featuredProducts = allProducts.filter(
+  (p) => p.isFeatured || p.isBestSeller
 );
 
-export const getProductsByCategory = (categoryId: string): Product[] =>
-  allProducts.filter((p) => p.category === categoryId);
+export const specialOffers = allProducts.filter(
+  (p) => p.isOnOffer || (p.discount !== undefined && p.discount >= 5)
+);
+
+export const getProductsByCategory = (categoryId: string): Product[] => {
+  if (categoryId === 'daily-essentials') {
+    return allProducts.filter((p) => p.category === 'kirana' || p.isBestSeller);
+  }
+  return allProducts.filter((p) => p.category === categoryId);
+};
+
+export const getProductBySlugOrId = (identifier: string): Product | undefined => {
+  return allProducts.find((p) => p.slug === identifier || p.id === identifier);
+};
+
+export const getRelatedProducts = (currentProduct: Product, limit = 4): Product[] => {
+  return allProducts
+    .filter(
+      (p) =>
+        p.id !== currentProduct.id &&
+        (p.category === currentProduct.category ||
+          (p.subcategory && p.subcategory === currentProduct.subcategory))
+    )
+    .slice(0, limit);
+};
+
+export const getFrequentlyBoughtTogether = (currentProduct: Product): Product[] => {
+  if (currentProduct.category === 'kirana') {
+    return allProducts
+      .filter((p) => ['k003', 'k004', 'k006', 'k011'].includes(p.id) && p.id !== currentProduct.id)
+      .slice(0, 2);
+  }
+  if (currentProduct.category === 'cold-drinks') {
+    return allProducts.filter((p) => ['sn001', 'sn002'].includes(p.id)).slice(0, 2);
+  }
+  if (currentProduct.category === 'stationery') {
+    return allProducts
+      .filter((p) => ['s001', 's002', 's003', 's004'].includes(p.id) && p.id !== currentProduct.id)
+      .slice(0, 2);
+  }
+  return allProducts
+    .filter((p) => p.id !== currentProduct.id && p.category === currentProduct.category)
+    .slice(0, 2);
+};

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8F1028"/>
+      <stop offset="100%" stop-color="#690D20"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD566"/>
+      <stop offset="100%" stop-color="#FFC83D"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="192" height="192" rx="0" fill="url(#bg)"/>
+
+  <!-- Gold Accent Inner Border -->
+  <rect x="6" y="6" width="180" height="180" rx="0" fill="none" stroke="#FFC83D" stroke-width="3" stroke-opacity="0.4"/>
+
+  <!-- Shopping Bag Icon & Retail Motif -->
+  <g transform="translate(29, 29)" filter="url(#shadow)">
+    <!-- Bag Body -->
+    <path d="M 26.8 46.9 
+             L 107.2 46.9 
+             L 115.24 115.24 
+             Q 115.24 123.28 107.2 123.28
+             L 26.8 123.28 
+             Q 18.76 123.28 18.76 115.24
+             Z" fill="url(#gold)"/>
+
+    <!-- Bag Handles -->
+    <path d="M 46.9 46.9 
+             C 46.9 16.08, 87.10000000000001 16.08, 87.10000000000001 46.9" 
+          fill="none" stroke="#FFFFFF" stroke-width="9.38" stroke-linecap="round"/>
+
+    <!-- Bag Inner Cutout Detail -->
+    <path d="M 53.6 46.9 
+             C 53.6 26.8, 80.39999999999999 26.8, 80.39999999999999 46.9" 
+          fill="none" stroke="#690D20" stroke-width="5.36" stroke-linecap="round"/>
+
+    <!-- Shree Seva "SS" Monogram in Center of Bag -->
+    <text x="67" y="91.12" 
+          font-family="system-ui, -apple-system, sans-serif" 
+          font-size="32.16" 
+          font-weight="900" 
+          fill="#8F1028" 
+          text-anchor="middle" 
+          letter-spacing="2.68">SS</text>
+  </g>
+</svg>

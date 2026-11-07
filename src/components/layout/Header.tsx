@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  Search,
   Heart,
   ShoppingCart,
   MapPin,
@@ -17,6 +16,8 @@ import {
 import { useCartStore } from '../../store/cartStore';
 import { useWishlistStore } from '../../store/wishlistStore';
 import { cn } from '../../utils';
+import { SearchBar } from './SearchBar';
+import { InstallAppModal } from '../pwa/InstallAppModal';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/', icon: Home },
@@ -27,8 +28,8 @@ const NAV_LINKS = [
 ];
 
 export function Header() {
-  const [searchQuery, setSearchQuery] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isInstallOpen, setIsInstallOpen] = useState(false);
   const navigate = useNavigate();
 
   const cartTotal = useCartStore((s) => s.totalItems());
@@ -40,13 +41,6 @@ export function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
 
   return (
     <header
@@ -85,19 +79,10 @@ export function Header() {
               <ChevronDown className="w-3 h-3 text-white/70" />
             </button>
 
-            {/* Search Input Bar */}
-            <form onSubmit={handleSearch} className="flex-1 mx-2">
-              <div className="relative">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for groceries, cold drinks, stationery and more..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white text-sm text-gray-800 placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-[#FFC83D] shadow-xs"
-                />
-              </div>
-            </form>
+            {/* Search Input Bar with Autocomplete & Recent History */}
+            <div className="flex-1 mx-2">
+              <SearchBar placeholder="Search for groceries, cold drinks, stationery and more..." />
+            </div>
 
             {/* Right Action Icons & Buttons */}
             <div className="flex items-center gap-3 shrink-0">
@@ -141,13 +126,14 @@ export function Header() {
               </button>
 
               {/* Download App Button */}
-              <Link
-                to="/download-app"
-                className="flex items-center gap-1.5 border border-white/30 hover:border-white text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors hover:bg-white/10 shadow-2xs"
+              <button
+                type="button"
+                onClick={() => setIsInstallOpen(true)}
+                className="flex items-center gap-1.5 border border-white/30 hover:border-white text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors hover:bg-white/10 shadow-2xs cursor-pointer"
               >
                 <Smartphone className="w-4 h-4 text-[#FFC83D]" />
                 <span>Download App</span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -234,22 +220,17 @@ export function Header() {
           </span>
         </div>
 
-        {/* Row 3: Full-width Search Bar */}
+        {/* Row 3: Full-width Search Bar with Autocomplete & Suggestions */}
         <div className="px-3.5 pb-2.5">
-          <form onSubmit={handleSearch}>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for groceries, cold drinks..."
-                className="w-full pl-9 pr-3.5 py-2 rounded-xl bg-white text-xs text-gray-800 placeholder:text-gray-400 outline-none shadow-xs focus:ring-2 focus:ring-[#FFC83D]"
-              />
-            </div>
-          </form>
+          <SearchBar isMobile placeholder="Search for groceries, cold drinks, stationery..." />
         </div>
       </div>
+
+      {/* PWA Install Modal */}
+      <InstallAppModal
+        isOpen={isInstallOpen}
+        onClose={() => setIsInstallOpen(false)}
+      />
     </header>
   );
 }

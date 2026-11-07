@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, LayoutGrid } from 'lucide-react';
-import { categories } from '../../data/categories';
+import { categories as defaultCategories } from '../../data/categories';
+import { useCategoriesQuery } from '../../services/queries';
 import { getGroceryFallbackImage } from '../../utils';
 
 export function CategoryGrid() {
+  const { data: categoriesData } = useCategoriesQuery();
+  const categoryList = categoriesData && categoriesData.length > 0 ? categoriesData : defaultCategories;
   return (
     <section className="max-w-[1400px] mx-auto px-4 lg:px-6 py-7 md:py-9">
       {/* Section Header */}
@@ -24,7 +27,7 @@ export function CategoryGrid() {
 
       {/* Grid: 4 columns on mobile, 8 columns on desktop matching reference mockup */}
       <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-7 lg:grid-cols-8 gap-2.5 sm:gap-3 md:gap-4">
-        {categories.map((cat) => (
+        {categoryList.map((cat) => (
           <Link
             key={cat.id}
             to={`/categories/${cat.slug}`}

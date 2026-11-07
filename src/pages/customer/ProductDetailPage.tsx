@@ -12,9 +12,11 @@ import {
   Truck, 
   Store, 
   ShieldCheck, 
-  Check 
+  Check,
+  Package,
+  Layers
 } from 'lucide-react';
-import { allProducts } from '../../data/products';
+import { allProducts, getFrequentlyBoughtTogether } from '../../data/products';
 import { useCartStore } from '../../store/cartStore';
 import { useWishlistStore } from '../../store/wishlistStore';
 import { formatPrice, cn, getGroceryFallbackImage } from '../../utils';
@@ -22,23 +24,27 @@ import { ProductCard } from '../../components/products/ProductCard';
 import type { ProductVariant } from '../../types';
 
 export function ProductDetailPage() {
-  const { id } = useParams<{ id: string }>();
+  const { id, slug } = useParams<{ id?: string; slug?: string }>();
   const navigate = useNavigate();
+  const identifier = slug || id;
 
   // Find product by id or slug
   const product = useMemo(() => {
-    return allProducts.find((p) => p.id === id || p.slug === id);
-  }, [id]);
+    return allProducts.find((p) => p.slug === identifier || p.id === identifier);
+  }, [identifier]);
 
   // If not found
   if (!product) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Product Not Found</h2>
+      <div className="max-w-4xl mx-auto px-4 py-20 text-center">
+        <div className="w-16 h-16 bg-[#FFF9EF] text-[#8F1028] rounded-3xl flex items-center justify-center mx-auto mb-4 border border-[#FFC83D]/40">
+          <Package className="w-8 h-8" />
+        </div>
+        <h2 className="text-2xl font-black text-gray-800 mb-2">Product Not Found</h2>
         <p className="text-sm text-gray-500 mb-6">The requested grocery item is unavailable or does not exist.</p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 bg-[#8F1028] text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-[#690D20] transition-colors"
+          className="inline-flex items-center gap-2 bg-[#8F1028] text-white px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-[#690D20] transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> Return to Store
         </Link>
@@ -49,7 +55,6 @@ export function ProductDetailPage() {
   // Active Variant State
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(() => {
     if (product.variants && product.variants.length > 0) {
-      // Find variant that matches unit, or first
       return product.variants.find((v) => v.label.toLowerCase() === product.unit.toLowerCase()) || product.variants[0];
     }
     return undefined;
@@ -108,6 +113,22 @@ export function ProductDetailPage() {
     }
   };
 
+  // Frequently Bought Together Combo
+  const comboItems = useMemo(() => {
+    return getFrequentlyBoughtTogether(product);
+  }, [product]);
+
+  const comboTotalPrice = useMemo(() => {
+    const itemsTotal = comboItems.reduce((sum, item) => sum + item.price, 0);
+    return currentPrice + itemsTotal;
+  }, [comboItems, currentPrice]);
+
+  const handleAddComboToCart = () => {
+    addItem(product, 1, selectedVariant);
+    comboItems.forEach((item) => addItem(item, 1));
+    openCart();
+  };
+
   // Related products from the same category
   const relatedProducts = useMemo(() => {
     return allProducts
@@ -133,7 +154,9 @@ export function ProductDetailPage() {
           <div className="hidden sm:flex items-center gap-2 text-xs text-gray-400">
             <Link to="/" className="hover:text-[#8F1028]">Home</Link>
             <span>/</span>
-            <Link to="/categories" className="hover:text-[#8F1028]">Categories</Link>
+            <Link to={`/categories/${product.category}`} className="hover:text-[#8F1028] capitalize">
+              {product.category.split('-').join(' ')}
+            </Link>
             <span>/</span>
             <span className="text-gray-700 font-medium truncate max-w-[200px]">{product.name}</span>
           </div>
@@ -173,9 +196,9 @@ export function ProductDetailPage() {
       <div className="max-w-6xl mx-auto px-4 py-4 md:py-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-10">
           
-          {/* ── Left Column: Product Gallery (Matching Reference Image) ── */}
+          {/* ── Left Column: Product Gallery ── */}
           <div className="md:col-span-6 flex flex-col-reverse sm:flex-row gap-3">
-            {/* Thumbnail list (vertical on desktop/tablet, horizontal on mobile) */}
+            {/* Thumbnail list */}
             {product.images.length > 1 && (
               <div className="flex sm:flex-col gap-2 shrink-0 overflow-x-auto sm:overflow-y-auto max-h-[380px] p-1">
                 {product.images.map((img, idx) => (
@@ -268,7 +291,7 @@ export function ProductDetailPage() {
               )}
             </div>
 
-            {/* Pack Size / Variant Selector (As in Reference Image) */}
+            {/* Pack Size / Variant Selector */}
             {product.variants && product.variants.length > 0 && (
               <div className="mb-5">
                 <div className="flex items-center justify-between mb-2">
@@ -317,8 +340,9 @@ export function ProductDetailPage() {
                   </button>
                   <span className="w-10 text-center text-sm font-black text-gray-800">{quantity}</span>
                   <button
-                    onClick={() => setQuantity((q) => q + 1)}
-                    className="p-2 hover:bg-gray-100 text-gray-600 transition-colors"
+                    onClick={() => setQuantity((q) => Math.min(currentStock, q + 1))}
+                    disabled={quantity >= currentStock}
+                    className="p-2 hover:bg-gray-100 text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                     aria-label="Increase quantity"
                   >
                     <Plus className="w-3.5 h-3.5" />
@@ -327,7 +351,7 @@ export function ProductDetailPage() {
                 <div className="text-xs">
                   {currentStock > 0 ? (
                     currentStock < 10 ? (
-                      <span className="text-orange-600 font-bold">Only {currentStock} packs left</span>
+                      <span className="text-orange-600 font-bold">Only {currentStock} packs left in store</span>
                     ) : (
                       <span className="text-green-600 font-semibold flex items-center gap-1">
                         <Check className="w-3.5 h-3.5" /> In Stock at Pachora Store
@@ -340,12 +364,12 @@ export function ProductDetailPage() {
               </div>
             </div>
 
-            {/* Desktop Action Buttons: Add to Cart & Buy Now (Matching Reference Image) */}
+            {/* Desktop Action Buttons: Add to Cart & Buy Now */}
             <div className="hidden sm:grid grid-cols-2 gap-3 mb-6">
               <button
                 onClick={handleAddToCart}
                 disabled={currentStock <= 0}
-                className="flex items-center justify-center gap-2 border-2 border-[#8F1028] text-[#8F1028] hover:bg-[#8F1028] hover:text-white py-3.5 rounded-2xl font-black text-sm transition-all duration-200 shadow-2xs active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex items-center justify-center gap-2 border-2 border-[#8F1028] text-[#8F1028] hover:bg-[#8F1028] hover:text-white py-3.5 rounded-2xl font-black text-sm transition-all duration-200 shadow-2xs active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
               >
                 <ShoppingCart className="w-4 h-4" />
                 Add to Cart
@@ -353,7 +377,7 @@ export function ProductDetailPage() {
               <button
                 onClick={handleBuyNow}
                 disabled={currentStock <= 0}
-                className="flex items-center justify-center gap-2 bg-[#8F1028] hover:bg-[#690D20] text-white py-3.5 rounded-2xl font-black text-sm transition-all duration-200 shadow-md active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex items-center justify-center gap-2 bg-[#8F1028] hover:bg-[#690D20] text-white py-3.5 rounded-2xl font-black text-sm transition-all duration-200 shadow-md active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
               >
                 <Zap className="w-4 h-4" />
                 Buy Now
@@ -385,6 +409,39 @@ export function ProductDetailPage() {
               </div>
             </div>
 
+            {/* Product Specifications Table */}
+            <div className="bg-white rounded-2xl border border-gray-100 p-4 mb-6">
+              <h3 className="text-xs font-bold text-gray-800 uppercase tracking-wider mb-3">
+                Product Specifications
+              </h3>
+              <div className="divide-y divide-gray-50 text-xs">
+                <div className="py-1.5 flex justify-between">
+                  <span className="text-gray-400">Category</span>
+                  <span className="font-semibold text-gray-800 capitalize">{product.category.replace('-', ' ')}</span>
+                </div>
+                {product.subcategory && (
+                  <div className="py-1.5 flex justify-between">
+                    <span className="text-gray-400">Subcategory</span>
+                    <span className="font-semibold text-gray-800 capitalize">{product.subcategory.replace('-', ' ')}</span>
+                  </div>
+                )}
+                {product.brand && (
+                  <div className="py-1.5 flex justify-between">
+                    <span className="text-gray-400">Brand</span>
+                    <span className="font-semibold text-gray-800">{product.brand}</span>
+                  </div>
+                )}
+                <div className="py-1.5 flex justify-between">
+                  <span className="text-gray-400">Unit / Pack Size</span>
+                  <span className="font-semibold text-gray-800">{selectedVariant?.label || product.unit}</span>
+                </div>
+                <div className="py-1.5 flex justify-between">
+                  <span className="text-gray-400">Dispatch Location</span>
+                  <span className="font-semibold text-[#8F1028]">Shree Seva Counter, Pachora</span>
+                </div>
+              </div>
+            </div>
+
             {/* Product Description */}
             <div className="bg-white rounded-2xl border border-gray-100 p-4">
               <h3 className="text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
@@ -410,6 +467,71 @@ export function ProductDetailPage() {
           </div>
         </div>
 
+        {/* ── Frequently Bought Together Combo Section ── */}
+        {comboItems.length > 0 && (
+          <div className="mt-12 bg-white rounded-3xl border border-gray-100 p-6 shadow-xs">
+            <div className="flex items-center gap-2 mb-4">
+              <Layers className="w-5 h-5 text-[#8F1028]" />
+              <h2 className="text-base sm:text-lg font-black text-gray-900">
+                Frequently Bought Together
+              </h2>
+            </div>
+            
+            <div className="flex flex-col lg:flex-row items-center gap-6 justify-between">
+              {/* Product thumbnails row */}
+              <div className="flex items-center flex-wrap gap-3">
+                {/* Current Product */}
+                <div className="w-20 h-20 bg-[#FDFBF7] rounded-2xl border border-gray-100 p-2 flex flex-col items-center justify-center text-center">
+                  <img
+                    src={activeImage}
+                    alt={product.name}
+                    className="w-12 h-12 object-contain"
+                  />
+                  <span className="text-[10px] font-bold text-gray-800 truncate w-full mt-1">
+                    {product.name}
+                  </span>
+                </div>
+
+                {comboItems.map((item) => (
+                  <div key={item.id} className="flex items-center gap-3">
+                    <span className="text-lg font-black text-gray-300">+</span>
+                    <div className="w-20 h-20 bg-[#FDFBF7] rounded-2xl border border-gray-100 p-2 flex flex-col items-center justify-center text-center">
+                      <img
+                        src={item.images[0]}
+                        alt={item.name}
+                        className="w-12 h-12 object-contain"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = getGroceryFallbackImage(item.name);
+                        }}
+                      />
+                      <span className="text-[10px] font-bold text-gray-800 truncate w-full mt-1">
+                        {item.name}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Combo Pricing & Action */}
+              <div className="flex items-center gap-4 bg-amber-50/50 border border-amber-200/50 p-4 rounded-2xl w-full lg:w-auto justify-between lg:justify-start">
+                <div>
+                  <p className="text-xs text-gray-500 font-medium">Combo Total ({comboItems.length + 1} items):</p>
+                  <p className="text-xl font-black text-[#8F1028]">
+                    {formatPrice(comboTotalPrice)}
+                  </p>
+                </div>
+                <button
+                  onClick={handleAddComboToCart}
+                  className="bg-[#8F1028] hover:bg-[#690D20] text-white px-5 py-2.5 rounded-xl font-bold text-xs transition-colors shrink-0 shadow-xs"
+                >
+                  Add Combo to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── Related Products Section ── */}
         {relatedProducts.length > 0 && (
           <div className="mt-12 pt-8 border-t border-gray-200">
@@ -433,7 +555,7 @@ export function ProductDetailPage() {
         )}
       </div>
 
-      {/* ── Mobile Sticky Bottom Action Bar (Matches Reference Image Mobile Experience) ── */}
+      {/* ── Mobile Sticky Bottom Action Bar ── */}
       <div className="sm:hidden fixed bottom-14 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-2.5 shadow-lg flex items-center gap-2.5">
         <button
           onClick={handleAddToCart}

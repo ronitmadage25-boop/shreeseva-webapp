@@ -24,6 +24,7 @@ export const useCartStore = create<CartStore>()(
 
       addItem: (product, quantity = 1, variant) => {
         set((state) => {
+          const maxStock = variant ? (variant.stock || 10) : (product.stock || 10);
           const key = variant ? `${product.id}-${variant.id}` : product.id;
           const existing = state.items.find((item) =>
             variant
@@ -31,22 +32,24 @@ export const useCartStore = create<CartStore>()(
               : item.product.id === product.id && !item.selectedVariant
           );
           if (existing) {
+            const newQty = Math.min(existing.quantity + quantity, maxStock);
             return {
               items: state.items.map((item) => {
                 const itemKey = item.selectedVariant
                   ? `${item.product.id}-${item.selectedVariant.id}`
                   : item.product.id;
                 if (itemKey === key) {
-                  return { ...item, quantity: item.quantity + quantity };
+                  return { ...item, quantity: newQty };
                 }
                 return item;
               }),
             };
           }
+          const initialQty = Math.min(Math.max(1, quantity), maxStock);
           return {
             items: [
               ...state.items,
-              { product, quantity, selectedVariant: variant },
+              { product, quantity: initialQty, selectedVariant: variant },
             ],
           };
         });
@@ -72,7 +75,11 @@ export const useCartStore = create<CartStore>()(
             const matches = variantId
               ? item.product.id === productId && item.selectedVariant?.id === variantId
               : item.product.id === productId;
-            if (matches) return { ...item, quantity };
+            if (matches) {
+              const maxStock = item.selectedVariant ? (item.selectedVariant.stock || 10) : (item.product.stock || 10);
+              const clampedQty = Math.min(quantity, maxStock);
+              return { ...item, quantity: clampedQty };
+            }
             return item;
           }),
         }));

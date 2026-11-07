@@ -41,7 +41,7 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
     return (
       <div className="flex gap-3 bg-white rounded-2xl p-3 shadow-xs border border-gray-100 hover:shadow-md transition-shadow">
         <Link
-          to={`/products/${product.id}`}
+          to={`/product/${product.slug}`}
           className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50/50 shrink-0 flex items-center justify-center p-1.5 border border-gray-100 block"
         >
           <img
@@ -62,7 +62,7 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
               {product.brand}
             </p>
           )}
-          <Link to={`/products/${product.id}`}>
+          <Link to={`/product/${product.slug}`}>
             <h3 className="text-sm font-semibold text-gray-800 line-clamp-1 hover:text-[#8F1028] transition-colors">{product.name}</h3>
           </Link>
           <p className="text-xs text-gray-400 mt-0.5">{product.unit}</p>
@@ -111,7 +111,7 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
   // ── Standard Grid Card (Matches the reference image product card) ──────────
   return (
     <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-xs hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col hover:border-[#8F1028]/20">
-      
+
       {/* Discount Badge */}
       {product.discount && (
         <div className="absolute top-2.5 left-2.5 z-10 bg-[#8F1028] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-xs">
@@ -135,7 +135,7 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
 
       {/* Product Image Container */}
       <Link
-        to={`/products/${product.id}`}
+        to={`/product/${product.slug}`}
         className="relative aspect-square bg-[#FDFBF7] p-3 overflow-hidden flex items-center justify-center border-b border-gray-50 block"
       >
         <img
@@ -161,7 +161,7 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
         )}
 
         {/* Product Title */}
-        <Link to={`/products/${product.id}`}>
+        <Link to={`/product/${product.slug}`}>
           <h3 className="text-xs sm:text-sm font-bold text-gray-800 leading-snug line-clamp-2 mb-1 group-hover:text-[#8F1028] transition-colors">
             {product.name}
           </h3>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8F1028"/>
+      <stop offset="100%" stop-color="#690D20"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD566"/>
+      <stop offset="100%" stop-color="#FFC83D"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="0" fill="url(#bg)"/>
+
+  <!-- Gold Accent Inner Border -->
+  <rect x="15" y="15" width="481" height="481" rx="0" fill="none" stroke="#FFC83D" stroke-width="8" stroke-opacity="0.4"/>
+
+  <!-- Shopping Bag Icon & Retail Motif -->
+  <g transform="translate(77, 77)" filter="url(#shadow)">
+    <!-- Bag Body -->
+    <path d="M 71.60000000000001 125.3 
+             L 286.40000000000003 125.3 
+             L 307.88 307.88 
+             Q 307.88 329.36 286.40000000000003 329.36
+             L 71.60000000000001 329.36 
+             Q 50.120000000000005 329.36 50.120000000000005 307.88
+             Z" fill="url(#gold)"/>
+
+    <!-- Bag Handles -->
+    <path d="M 125.3 125.3 
+             C 125.3 42.96, 232.70000000000002 42.96, 232.70000000000002 125.3" 
+          fill="none" stroke="#FFFFFF" stroke-width="25.060000000000002" stroke-linecap="round"/>
+
+    <!-- Bag Inner Cutout Detail -->
+    <path d="M 143.20000000000002 125.3 
+             C 143.20000000000002 71.60000000000001, 214.79999999999998 71.60000000000001, 214.79999999999998 125.3" 
+          fill="none" stroke="#690D20" stroke-width="14.32" stroke-linecap="round"/>
+
+    <!-- Shree Seva "SS" Monogram in Center of Bag -->
+    <text x="179" y="243.44000000000003" 
+          font-family="system-ui, -apple-system, sans-serif" 
+          font-size="85.92" 
+          font-weight="900" 
+          fill="#8F1028" 
+          text-anchor="middle" 
+          letter-spacing="7.16">SS</text>
+  </g>
+</svg>

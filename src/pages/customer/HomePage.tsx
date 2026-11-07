@@ -11,8 +11,11 @@ import {
   stationeryProducts,
   bestSellers,
 } from '../../data/products';
+import { useBestSellersQuery } from '../../services/queries';
 
 export function HomePage() {
+  const { data: dbBestSellers } = useBestSellersQuery();
+  const activeBestSellers = dbBestSellers && dbBestSellers.length > 0 ? dbBestSellers : bestSellers;
   return (
     <div className="w-full overflow-x-hidden">
       {/* Desktop Hero Banner (Hidden on Mobile) */}
@@ -64,7 +67,7 @@ export function HomePage() {
       <ProductSection
         title="🔥 Best Sellers"
         subtitle="Most popular and trusted products ordered by our customers"
-        products={bestSellers}
+        products={activeBestSellers}
         viewAllHref="/best-sellers"
         maxItems={6}
         bgColor="#FFF9EF"

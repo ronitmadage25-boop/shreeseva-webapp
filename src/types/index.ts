@@ -18,9 +18,11 @@ export interface Product {
   rating: number;
   reviewCount: number;
   tags?: string[];
+  searchKeywords?: string[];
   isBestSeller?: boolean;
   isNewArrival?: boolean;
   isOnOffer?: boolean;
+  isFeatured?: boolean;
 }
 
 export interface ProductVariant {

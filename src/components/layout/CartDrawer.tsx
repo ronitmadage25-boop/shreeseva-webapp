@@ -54,7 +54,11 @@ export function CartDrawer() {
                 : item.product.id;
               return (
                 <div key={key} className="flex gap-3 bg-gray-50 rounded-xl p-3 border border-gray-100">
-                  <div className="w-16 h-16 rounded-xl overflow-hidden bg-white p-1 shrink-0 border border-gray-100 flex items-center justify-center">
+                  <Link
+                    to={`/product/${item.product.slug}`}
+                    onClick={closeCart}
+                    className="w-16 h-16 rounded-xl overflow-hidden bg-white p-1 shrink-0 border border-gray-100 flex items-center justify-center block"
+                  >
                     <img
                       src={item.product.images[0]}
                       alt={item.product.name}
@@ -66,11 +70,15 @@ export function CartDrawer() {
                       }}
                       loading="lazy"
                     />
-                  </div>
+                  </Link>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-800 line-clamp-2">
+                    <Link
+                      to={`/product/${item.product.slug}`}
+                      onClick={closeCart}
+                      className="text-sm font-medium text-gray-800 line-clamp-2 hover:text-[#8F1028] transition-colors"
+                    >
                       {item.product.name}
-                    </p>
+                    </Link>
                     {item.selectedVariant && (
                       <p className="text-xs text-gray-500 mt-0.5">{item.selectedVariant.label}</p>
                     )}

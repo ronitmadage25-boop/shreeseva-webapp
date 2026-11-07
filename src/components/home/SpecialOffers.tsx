@@ -38,7 +38,7 @@ export function SpecialOffers() {
           {offers.map((product) => (
             <Link
               key={product.id}
-              to={`/categories/${product.category}`}
+              to={`/product/${product.slug}`}
               className="bg-white/10 hover:bg-white/15 border border-white/15 rounded-2xl p-3.5 flex gap-3.5 items-center transition-all duration-200 group hover:scale-[1.01]"
             >
               {/* Product Thumbnail */}
