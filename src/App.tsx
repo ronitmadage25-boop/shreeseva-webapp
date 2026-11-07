@@ -8,6 +8,7 @@ import { CheckoutPage } from './pages/customer/CheckoutPage';
 import { OrderTrackingPage } from './pages/customer/OrderTrackingPage';
 import { WishlistPage } from './pages/customer/WishlistPage';
 import { AccountPage } from './pages/customer/AccountPage';
+import { ProductDetailPage } from './pages/customer/ProductDetailPage';
 
 function NotFound() {
   return (
@@ -33,6 +34,7 @@ export function App() {
           <Route index element={<HomePage />} />
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="categories/:slug" element={<CategoryPage />} />
+          <Route path="products/:id" element={<ProductDetailPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="track-order" element={<OrderTrackingPage />} />

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../../store/cartStore';
-import { formatPrice } from '../../utils';
+import { formatPrice, getGroceryFallbackImage } from '../../utils';
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 
 export function CartPage() {
@@ -36,11 +36,17 @@ export function CartPage() {
               : item.product.id;
             return (
               <div key={key} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex gap-4">
-                <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50">
+                <div className="w-20 h-20 rounded-xl overflow-hidden bg-white p-1.5 shrink-0 border border-gray-100 flex items-center justify-center">
                   <img
                     src={item.product.images[0]}
                     alt={item.product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.onerror = null;
+                      target.src = getGroceryFallbackImage(item.product.name);
+                    }}
+                    loading="lazy"
                   />
                 </div>
                 <div className="flex-1 min-w-0">

@@ -8,9 +8,6 @@ import type { Product } from '../types';
 // Real data will be populated through the admin dashboard in a future phase.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Reliable picsum.photos seeds produce consistent images per product.
-// Deterministic seeds (by product id) ensure the same image every render.
-
 // ─── KIRANA & DAILY GROCERIES ───────────────────────────────────────────────
 
 export const kiranaProducts: Product[] = [
@@ -22,8 +19,8 @@ export const kiranaProducts: Product[] = [
     price: 279,
     originalPrice: 299,
     discount: 7,
-    // Wheat flour / grain — warm earthy tones
-    images: ['https://picsum.photos/seed/k001-atta/400/400'],
+    // Wheat flour grains in burlap sack
+    images: ['https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80'],
     category: 'kirana',
     subcategory: 'atta-flour',
     brand: 'Aashirvaad',
@@ -48,7 +45,8 @@ export const kiranaProducts: Product[] = [
     price: 185,
     originalPrice: 210,
     discount: 12,
-    images: ['https://picsum.photos/seed/k002-rice/400/400'],
+    // Long-grain white basmati rice bowl
+    images: ['https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80'],
     category: 'kirana',
     subcategory: 'rice',
     brand: 'India Gate',
@@ -72,7 +70,8 @@ export const kiranaProducts: Product[] = [
     price: 149,
     originalPrice: 165,
     discount: 10,
-    images: ['https://picsum.photos/seed/k003-oil/400/400'],
+    // Clear bottle of golden cooking oil
+    images: ['https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80'],
     category: 'kirana',
     subcategory: 'cooking-oil',
     brand: 'Fortune',
@@ -95,7 +94,8 @@ export const kiranaProducts: Product[] = [
     price: 24,
     originalPrice: 26,
     discount: 8,
-    images: ['https://picsum.photos/seed/k004-salt/400/400'],
+    // Pure white salt crystals in bowl
+    images: ['https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?w=400&q=80'],
     category: 'kirana',
     subcategory: 'salt',
     brand: 'Tata',
@@ -118,7 +118,8 @@ export const kiranaProducts: Product[] = [
     price: 89,
     originalPrice: 99,
     discount: 10,
-    images: ['https://picsum.photos/seed/k005-dal/400/400'],
+    // Yellow chana dal / lentils in bowl
+    images: ['https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?w=400&q=80'],
     category: 'kirana',
     subcategory: 'dal-pulses',
     brand: 'Tata Sampann',
@@ -140,7 +141,8 @@ export const kiranaProducts: Product[] = [
     price: 219,
     originalPrice: 240,
     discount: 9,
-    images: ['https://picsum.photos/seed/k006-tea/400/400'],
+    // Aromatic Indian tea leaves & glass of chai
+    images: ['https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80'],
     category: 'kirana',
     subcategory: 'tea-coffee',
     brand: 'Brooke Bond',
@@ -163,7 +165,8 @@ export const kiranaProducts: Product[] = [
     price: 35,
     originalPrice: 38,
     discount: 8,
-    images: ['https://picsum.photos/seed/k007-biscuit/400/400'],
+    // Crispy golden tea biscuits
+    images: ['https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80'],
     category: 'kirana',
     subcategory: 'biscuits',
     brand: 'Britannia',
@@ -187,7 +190,8 @@ export const kiranaProducts: Product[] = [
     price: 48,
     originalPrice: 52,
     discount: 8,
-    images: ['https://picsum.photos/seed/k008-sugar/400/400'],
+    // White refined granulated sugar
+    images: ['https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=400&q=80'],
     category: 'kirana',
     subcategory: 'sugar',
     brand: 'Uttam',
@@ -209,7 +213,8 @@ export const kiranaProducts: Product[] = [
     price: 549,
     originalPrice: 590,
     discount: 7,
-    images: ['https://picsum.photos/seed/k009-ghee/400/400'],
+    // Golden pure cow ghee in glass jar
+    images: ['https://images.unsplash.com/photo-1626200419199-391ae4be7a41?w=400&q=80'],
     category: 'kirana',
     subcategory: 'ghee-butter',
     brand: 'Amul',
@@ -232,7 +237,8 @@ export const kiranaProducts: Product[] = [
     price: 65,
     originalPrice: 72,
     discount: 10,
-    images: ['https://picsum.photos/seed/k010-masala/400/400'],
+    // Authentic Indian spice mix and ground masala
+    images: ['https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80'],
     category: 'kirana',
     subcategory: 'spices-masala',
     brand: 'MDH',
@@ -254,7 +260,8 @@ export const kiranaProducts: Product[] = [
     price: 14,
     originalPrice: 15,
     discount: 7,
-    images: ['https://picsum.photos/seed/k011-maggi/400/400'],
+    // Classic yellow instant noodles
+    images: ['https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80'],
     category: 'kirana',
     subcategory: 'packaged-foods',
     brand: 'Maggi',
@@ -277,7 +284,8 @@ export const kiranaProducts: Product[] = [
     description: 'Fresh homogenised toned milk, pasteurised for safety.',
     price: 25,
     originalPrice: 25,
-    images: ['https://picsum.photos/seed/k012-milk/400/400'],
+    // Fresh white milk in bottle/glass
+    images: ['https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&q=80'],
     category: 'kirana',
     subcategory: 'dairy',
     brand: 'Amul',
@@ -303,7 +311,8 @@ export const beverageProducts: Product[] = [
     description: 'The classic refreshing taste of Coca-Cola.',
     price: 50,
     originalPrice: 50,
-    images: ['https://picsum.photos/seed/b001-cola/400/400'],
+    // Coca-Cola bottle with classic red label
+    images: ['https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&q=80'],
     category: 'cold-drinks',
     brand: 'Coca-Cola',
     unit: '1.25 L',
@@ -326,7 +335,8 @@ export const beverageProducts: Product[] = [
     description: 'Crisp lemon-lime flavour — clear, refreshing, no caffeine.',
     price: 50,
     originalPrice: 50,
-    images: ['https://picsum.photos/seed/b002-sprite/400/400'],
+    // Sprite bottle / green soda can
+    images: ['https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=400&q=80'],
     category: 'cold-drinks',
     brand: 'Sprite',
     unit: '1.25 L',
@@ -347,7 +357,8 @@ export const beverageProducts: Product[] = [
     price: 99,
     originalPrice: 110,
     discount: 10,
-    images: ['https://picsum.photos/seed/b003-juice/400/400'],
+    // Fruit juice bottle
+    images: ['https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80'],
     category: 'cold-drinks',
     brand: 'Real',
     unit: '1 L',
@@ -367,7 +378,8 @@ export const beverageProducts: Product[] = [
     description: 'Pure, clean and safe packaged drinking water.',
     price: 20,
     originalPrice: 20,
-    images: ['https://picsum.photos/seed/b004-water/400/400'],
+    // Packaged mineral water bottle
+    images: ['https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&q=80'],
     category: 'cold-drinks',
     brand: 'Bisleri',
     unit: '1 L',
@@ -390,7 +402,8 @@ export const beverageProducts: Product[] = [
     price: 115,
     originalPrice: 125,
     discount: 8,
-    images: ['https://picsum.photos/seed/b005-energy/400/400'],
+    // Black energy drink can
+    images: ['https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=400&q=80'],
     category: 'cold-drinks',
     brand: 'Monster',
     unit: '473 ml',
@@ -407,7 +420,8 @@ export const beverageProducts: Product[] = [
     price: 20,
     originalPrice: 22,
     discount: 9,
-    images: ['https://picsum.photos/seed/b006-frooti/400/400'],
+    // Mango juice drink bottle
+    images: ['https://images.unsplash.com/photo-1546171753-97d7676e4602?w=400&q=80'],
     category: 'cold-drinks',
     brand: 'Frooti',
     unit: '200 ml',
@@ -433,7 +447,8 @@ export const stationeryProducts: Product[] = [
     price: 60,
     originalPrice: 65,
     discount: 8,
-    images: ['https://picsum.photos/seed/s001-notebook/400/400'],
+    // Ruled single-line student notebook
+    images: ['https://images.unsplash.com/photo-1531346680769-a1d79b57de5c?w=400&q=80'],
     category: 'stationery',
     subcategory: 'notebooks',
     brand: 'Classmate',
@@ -457,7 +472,8 @@ export const stationeryProducts: Product[] = [
     price: 10,
     originalPrice: 12,
     discount: 17,
-    images: ['https://picsum.photos/seed/s002-pen/400/400'],
+    // Ballpoint writing pens
+    images: ['https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=400&q=80'],
     category: 'stationery',
     subcategory: 'pens',
     brand: 'Cello',
@@ -479,7 +495,8 @@ export const stationeryProducts: Product[] = [
     price: 55,
     originalPrice: 60,
     discount: 8,
-    images: ['https://picsum.photos/seed/s003-pencil/400/400'],
+    // HB graphite drawing pencils
+    images: ['https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=400&q=80'],
     category: 'stationery',
     subcategory: 'pencils',
     brand: 'Faber-Castell',
@@ -497,7 +514,8 @@ export const stationeryProducts: Product[] = [
     price: 120,
     originalPrice: 135,
     discount: 11,
-    images: ['https://picsum.photos/seed/s004-geometry/400/400'],
+    // Geometry math instrument set / compass
+    images: ['https://images.unsplash.com/photo-1457301353672-324d6d14f471?w=400&q=80'],
     category: 'stationery',
     subcategory: 'school-supplies',
     brand: 'Camlin',
@@ -520,7 +538,8 @@ export const personalCareProducts: Product[] = [
     price: 42,
     originalPrice: 48,
     discount: 13,
-    images: ['https://picsum.photos/seed/p001-soap/400/400'],
+    // Soap bars
+    images: ['https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400&q=80'],
     category: 'personal-care',
     brand: 'Lifebuoy',
     unit: '4 × 100 g',
@@ -537,7 +556,8 @@ export const personalCareProducts: Product[] = [
     price: 199,
     originalPrice: 220,
     discount: 10,
-    images: ['https://picsum.photos/seed/p002-shampoo/400/400'],
+    // Hair shampoo bottle
+    images: ['https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80'],
     category: 'personal-care',
     brand: 'Pantene',
     unit: '340 ml',
@@ -559,7 +579,8 @@ export const cleaningProducts: Product[] = [
     price: 299,
     originalPrice: 335,
     discount: 11,
-    images: ['https://picsum.photos/seed/c001-detergent/400/400'],
+    // Laundry washing powder / detergent
+    images: ['https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&q=80'],
     category: 'home-cleaning',
     brand: 'Surf Excel',
     unit: '1 kg',
@@ -576,7 +597,8 @@ export const cleaningProducts: Product[] = [
     price: 85,
     originalPrice: 95,
     discount: 11,
-    images: ['https://picsum.photos/seed/c002-toothpaste/400/400'],
+    // Toothpaste tube
+    images: ['https://images.unsplash.com/photo-1559190394-df5a28aab5c5?w=400&q=80'],
     category: 'home-cleaning',
     brand: 'Colgate',
     unit: '300 g',
@@ -598,7 +620,8 @@ export const snackProducts: Product[] = [
     description: 'Perfectly salted crispy potato chips.',
     price: 20,
     originalPrice: 20,
-    images: ['https://picsum.photos/seed/sn001-lays/400/400'],
+    // Potato chips packet
+    images: ['https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&q=80'],
     category: 'snacks',
     brand: "Lay's",
     unit: '52 g',
@@ -620,7 +643,8 @@ export const snackProducts: Product[] = [
     description: "India's beloved glucose biscuit for generations.",
     price: 10,
     originalPrice: 10,
-    images: ['https://picsum.photos/seed/sn002-parleg/400/400'],
+    // Glucose tea biscuits
+    images: ['https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80'],
     category: 'snacks',
     brand: 'Parle-G',
     unit: '100 g',

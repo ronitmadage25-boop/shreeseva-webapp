@@ -1,7 +1,7 @@
 import { X, Trash2, ShoppingBag, Plus, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../../store/cartStore';
-import { formatPrice } from '../../utils';
+import { formatPrice, getGroceryFallbackImage } from '../../utils';
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, totalItems, totalPrice } =
@@ -53,12 +53,20 @@ export function CartDrawer() {
                 ? `${item.product.id}-${item.selectedVariant.id}`
                 : item.product.id;
               return (
-                <div key={key} className="flex gap-3 bg-gray-50 rounded-xl p-3">
-                  <img
-                    src={item.product.images[0]}
-                    alt={item.product.name}
-                    className="w-16 h-16 object-cover rounded-lg bg-white"
-                  />
+                <div key={key} className="flex gap-3 bg-gray-50 rounded-xl p-3 border border-gray-100">
+                  <div className="w-16 h-16 rounded-xl overflow-hidden bg-white p-1 shrink-0 border border-gray-100 flex items-center justify-center">
+                    <img
+                      src={item.product.images[0]}
+                      alt={item.product.name}
+                      className="w-full h-full object-contain"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.onerror = null;
+                        target.src = getGroceryFallbackImage(item.product.name);
+                      }}
+                      loading="lazy"
+                    />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-800 line-clamp-2">
                       {item.product.name}

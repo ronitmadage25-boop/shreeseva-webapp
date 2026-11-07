@@ -6,9 +6,9 @@ import { CartDrawer } from '../components/layout/CartDrawer';
 
 export function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-brand-cream">
+    <div className="min-h-screen flex flex-col bg-brand-cream overflow-x-hidden w-full">
       <Header />
-      <main className="flex-1 pb-16 md:pb-0">
+      <main className="flex-1 pb-20 md:pb-0 w-full">
         <Outlet />
       </main>
       <Footer />
@@ -17,4 +17,3 @@ export function MainLayout() {
     </div>
   );
 }
-

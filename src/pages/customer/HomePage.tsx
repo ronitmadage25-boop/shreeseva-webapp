@@ -14,47 +14,47 @@ import {
 
 export function HomePage() {
   return (
-    <div>
-      {/* Desktop Hero / Mobile Promo Banner */}
+    <div className="w-full overflow-x-hidden">
+      {/* Desktop Hero Banner (Hidden on Mobile) */}
       <div className="hidden md:block">
         <HeroBanner />
       </div>
 
-      {/* Mobile Promo Banner */}
+      {/* Mobile Promo Banner (Matches Reference Image Mobile Phone Screen) */}
       <PromoBanner />
 
-      {/* Shopping Benefits */}
+      {/* Shopping Benefits (Home Delivery, Store Pickup, Secure Payments, Support) */}
       <ShoppingBenefits />
 
-      {/* Shop by Category */}
+      {/* Shop by Category (Kirana first, Cold Drinks, Stationery, etc.) */}
       <CategoryGrid />
 
-      {/* Daily Grocery Essentials — PRIMARY focus */}
+      {/* Daily Grocery Essentials — PRIMARY CATEGORY (Atta, Rice, Cooking Oil, Salt, Dal, Tea, Biscuits, Sugar) */}
       <ProductSection
         title="Daily Grocery Essentials"
-        subtitle="Your everyday kirana needs at the best prices"
+        subtitle="Essential kirana staples for your home — flour, rice, cooking oils, dal, tea & daily essentials"
         products={kiranaProducts}
         viewAllHref="/categories/kirana-groceries"
-        maxItems={6}
+        maxItems={8}
       />
 
       {/* Cold Drinks & Beverages */}
       <ProductSection
         title="Cold Drinks & Beverages"
-        subtitle="Stay refreshed with your favourite drinks"
+        subtitle="Refreshing soft drinks, packaged mineral water, pure juices and energy beverages"
         products={beverageProducts}
         viewAllHref="/categories/cold-drinks-beverages"
         maxItems={6}
         bgColor="#F0F7FF"
       />
 
-      {/* Special Offers */}
+      {/* Special Offers Section */}
       <SpecialOffers />
 
       {/* General Stationery */}
       <ProductSection
         title="General Stationery"
-        subtitle="Notebooks, pens and school supplies"
+        subtitle="School notebooks, smooth ballpoint pens, drawing pencils and geometry supplies"
         products={stationeryProducts}
         viewAllHref="/categories/general-stationery"
         maxItems={4}
@@ -63,7 +63,7 @@ export function HomePage() {
       {/* Best Sellers */}
       <ProductSection
         title="🔥 Best Sellers"
-        subtitle="Most loved products in our store"
+        subtitle="Most popular and trusted products ordered by our customers"
         products={bestSellers}
         viewAllHref="/best-sellers"
         maxItems={6}
