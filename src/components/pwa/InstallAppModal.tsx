@@ -40,9 +40,9 @@ export function InstallAppModal({ isOpen, onClose }: InstallAppModalProps) {
           </button>
 
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-[#FFC83D] p-1.5 shadow-md shrink-0 flex items-center justify-center border-2 border-white/20">
+            <div className="w-16 h-16 rounded-2xl bg-white p-1 shadow-md shrink-0 flex items-center justify-center border-2 border-white/20 overflow-hidden">
               <img
-                src="/icons/icon.svg"
+                src="/logo.png"
                 alt="Shree Seva App Icon"
                 className="w-full h-full object-contain"
               />
@@ -52,10 +52,10 @@ export function InstallAppModal({ isOpen, onClose }: InstallAppModalProps) {
                 Official Web App
               </span>
               <h2 className="text-lg font-black text-white leading-tight">
-                Shree Seva Enterprises
+                Shree Seva
               </h2>
               <p className="text-xs text-amber-100/90 mt-0.5">
-                Fast, local grocery shopping in Pachora
+                Daily Kirana & Groceries in Pachora
               </p>
             </div>
           </div>

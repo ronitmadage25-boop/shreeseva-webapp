@@ -56,9 +56,11 @@ export function Header() {
           <div className="flex items-center gap-4 py-3">
             {/* Business Logo */}
             <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="w-10 h-10 bg-[#FFC83D] rounded-xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <ShoppingCart className="w-5 h-5 text-[#8F1028]" strokeWidth={2.6} />
-              </div>
+              <img
+                src="/icons/icon-192x192.png"
+                alt="Shree Seva Logo"
+                className="w-10 h-10 rounded-xl object-contain shadow-md group-hover:scale-105 transition-transform"
+              />
               <div>
                 <p className="text-white font-black text-sm tracking-wide leading-tight">
                   SHREE SEVA
@@ -166,9 +168,11 @@ export function Header() {
         <div className="flex items-center justify-between px-3.5 pt-2.5 pb-1.5 gap-2">
           {/* Branded Logo */}
           <Link to="/" className="flex items-center gap-2 min-w-0">
-            <div className="w-8 h-8 bg-[#FFC83D] rounded-lg flex items-center justify-center shrink-0 shadow-xs">
-              <ShoppingCart className="w-4 h-4 text-[#8F1028]" strokeWidth={2.6} />
-            </div>
+            <img
+              src="/icons/icon-192x192.png"
+              alt="Shree Seva Logo"
+              className="w-8 h-8 rounded-lg object-contain shrink-0 shadow-xs"
+            />
             <div className="min-w-0">
               <p className="text-white font-black text-xs leading-tight tracking-wide truncate">
                 SHREE SEVA

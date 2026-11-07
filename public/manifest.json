@@ -1,5 +1,5 @@
 {
-  "name": "Shree Seva Enterprises & Readymade",
+  "name": "Shree Seva",
   "short_name": "Shree Seva",
   "description": "Your local Pachora retail store online — daily kirana, groceries, cold drinks, and general stationery.",
   "start_url": "/",
@@ -7,7 +7,7 @@
   "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#8F1028",
-  "background_color": "#FFF9EF",
+  "background_color": "#FFFFFF",
   "lang": "en-IN",
   "categories": ["shopping", "food", "lifestyle"],
   "icons": [
@@ -34,13 +34,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
-    },
-    {
-      "src": "/icons/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
     }
   ]
 }
-

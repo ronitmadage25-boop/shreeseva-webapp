@@ -1,12 +1,15 @@
-// Shree Seva PWA Service Worker — Version 1.0.0
-const CACHE_NAME = 'shreeseva-v1';
+// Shree Seva PWA Service Worker — Version 1.1.0
+const CACHE_NAME = 'shreeseva-v1.1.0';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/icons/icon.svg',
+  '/favicon.ico',
+  '/logo.png',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
+  '/icons/icon-maskable-192x192.png',
+  '/icons/icon-maskable-512x512.png',
   '/icons/apple-touch-icon.png'
 ];
 
@@ -17,7 +20,6 @@ self.addEventListener('install', (event) => {
       return cache.addAll(STATIC_ASSETS);
     })
   );
-  // Do not automatically skipWaiting to avoid interrupting active user checkouts
 });
 
 // ── Activate: Clean up older cache versions ──────────────────────────────────
@@ -39,7 +41,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // 1. Never cache API calls, sensitive requests, or non-GET requests
+  // 1. Never cache API calls, sensitive customer/admin sessions, or mutations
   if (event.request.method !== 'GET' || url.pathname.startsWith('/api/')) {
     event.respondWith(
       fetch(event.request).catch(() => {
@@ -94,4 +96,3 @@ self.addEventListener('message', (event) => {
     self.skipWaiting();
   }
 });
-
