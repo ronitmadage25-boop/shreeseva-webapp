@@ -128,9 +128,13 @@ adminAuthRouter.post('/login', async (req, res) => {
         isTemporaryPassword: user.isTemporaryPassword,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Admin login error:', error);
-    res.status(500).json({ success: false, message: 'Internal authentication error occurred.' });
+    res.status(500).json({
+      success: false,
+      message: error?.message || 'Internal authentication error occurred.',
+      detail: process.env.DATABASE_URL ? undefined : 'DATABASE_URL is missing in environment variables.',
+    });
   }
 });
 
