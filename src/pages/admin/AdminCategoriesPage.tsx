@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Grid3X3, Plus, Edit, RefreshCw, X, Check } from 'lucide-react';
 import { adminApi } from '../../services/admin/adminClient';
+import { ImageUpload } from '../../components/admin/ImageUpload';
 
 export function AdminCategoriesPage() {
   const [categories, setCategories] = useState<any[]>([]);
@@ -221,16 +222,13 @@ export function AdminCategoriesPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block font-bold text-gray-800 mb-1">Category Image URL</label>
-                <input
-                  type="url"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="https://images.unsplash.com/..."
-                  className="w-full bg-[#F6F9F7] border border-[#E5ECE7] rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-[#16834A]"
-                />
-              </div>
+              {/* Upload Category Image or Click Picture with Camera */}
+              <ImageUpload
+                label="Category Banner / Icon"
+                placeholder="Upload category photo or click picture with camera"
+                value={imageUrl}
+                onChange={(img) => setImageUrl(img)}
+              />
 
               <div className="pt-3 border-t border-[#E5ECE7] flex justify-end gap-2.5">
                 <button

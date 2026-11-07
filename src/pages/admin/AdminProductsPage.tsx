@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { adminApi } from '../../services/admin/adminClient';
 import { formatPrice } from '../../utils';
+import { ImageUpload } from '../../components/admin/ImageUpload';
 
 export function AdminProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
@@ -427,30 +428,25 @@ export function AdminProductsPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-bold text-gray-800 mb-1">Pack Size / Unit Label *</label>
-                  <input
-                    type="text"
-                    value={formData.unitValue}
-                    onChange={(e) => setFormData({ ...formData, unitValue: e.target.value })}
-                    placeholder="e.g. 5 kg Pack, 1 L Bottle, 200 Pages"
-                    required
-                    className="w-full bg-[#F6F9F7] border border-[#E5ECE7] rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-[#16834A]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold text-gray-800 mb-1">Image URL</label>
-                  <input
-                    type="url"
-                    value={formData.imageUrl}
-                    onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                    placeholder="https://..."
-                    className="w-full bg-[#F6F9F7] border border-[#E5ECE7] rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-[#16834A]"
-                  />
-                </div>
+              <div>
+                <label className="block font-bold text-gray-800 mb-1">Pack Size / Unit Label *</label>
+                <input
+                  type="text"
+                  value={formData.unitValue}
+                  onChange={(e) => setFormData({ ...formData, unitValue: e.target.value })}
+                  placeholder="e.g. 5 kg Pack, 1 L Bottle, 200 Pages"
+                  required
+                  className="w-full bg-[#F6F9F7] border border-[#E5ECE7] rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-[#16834A]"
+                />
               </div>
+
+              {/* Upload Image or Click Picture with Camera */}
+              <ImageUpload
+                label="Product Photograph *"
+                placeholder="Upload product packaging or click a photo with phone"
+                value={formData.imageUrl}
+                onChange={(img) => setFormData({ ...formData, imageUrl: img })}
+              />
 
               <div>
                 <label className="block font-bold text-gray-800 mb-1">Description</label>
